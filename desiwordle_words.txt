@@ -1,0 +1,91 @@
+# SHABDLE WORD BANK
+# ------------------------------------------------------------------
+# Format:  WORD | meaning | Category
+#   - one entry per line
+#   - WORD must be exactly 5 letters (A-Z); anything else is ignored
+#   - meaning and category are optional (category defaults to "Words")
+#   - lines starting with # and blank lines are ignored
+#   - the daily answer is chosen by date: dayNumber % (number of words),
+#     so the order of this file decides which word maps to which day
+# ------------------------------------------------------------------
+
+# --- Food & Drink ---
+CHAAT | savoury street snack | Food & Drink
+LADDU | round festive sweet | Food & Drink
+HALWA | warm sweet pudding | Food & Drink
+KHEER | rice-milk pudding | Food & Drink
+POORI | fried puffed bread | Food & Drink
+BARFI | milk fudge sweet | Food & Drink
+KULFI | dense frozen dessert | Food & Drink
+TIKKA | marinated grilled bites | Food & Drink
+KORMA | creamy braised curry | Food & Drink
+PULAO | spiced rice dish | Food & Drink
+ACHAR | tangy pickle | Food & Drink
+BESAN | gram flour | Food & Drink
+CHANA | chickpea | Food & Drink
+RAJMA | kidney-bean curry | Food & Drink
+SABZI | cooked vegetables | Food & Drink
+LASSI | yogurt drink | Food & Drink
+PEDHA | soft milk sweet | Food & Drink
+BHUNA | pan-fried curry style | Food & Drink
+
+# --- Feelings & Life ---
+PYAAR | love | Feelings & Life
+DOSTI | friendship | Feelings & Life
+KHUSH | happy | Feelings & Life
+GUSSA | anger | Feelings & Life
+PAISA | money | Feelings & Life
+IZZAT | honour, respect | Feelings & Life
+MASTI | playful fun | Feelings & Life
+SAPNA | a dream | Feelings & Life
+YAARI | close friendship | Feelings & Life
+NEEND | sleep | Feelings & Life
+PYAAS | thirst | Feelings & Life
+
+# --- Culture & Faith ---
+POOJA | worship ritual | Culture & Faith
+AARTI | lamp prayer | Culture & Faith
+TABLA | hand-drum pair | Culture & Faith
+SITAR | plucked string instrument | Culture & Faith
+VEENA | classical string instrument | Culture & Faith
+RAAGA | melodic mode | Culture & Faith
+HENNA | mehndi dye | Culture & Faith
+RAKHI | sibling's thread | Culture & Faith
+TILAK | forehead mark | Culture & Faith
+KARMA | action & consequence | Culture & Faith
+SADHU | wandering ascetic | Culture & Faith
+BINDI | forehead dot | Culture & Faith
+
+# --- Dress ---
+SAREE | draped garment | Dress
+DHOTI | draped lower garment | Dress
+KURTA | long loose tunic | Dress
+
+# --- People ---
+RAAJA | king | People
+RAANI | queen | People
+MAAMA | maternal uncle | People
+BEHEN | sister | People
+DULHA | bridegroom | People
+
+# --- Nature ---
+PHOOL | flower | Nature
+CHAND | moon | Nature
+DHOOP | sunshine | Nature
+BAAGH | tiger | Nature
+HAATH | hand | Nature
+AANKH | eye | Nature
+
+# --- Places ---
+DELHI | the capital city | Places
+PATNA | Bihar's capital | Places
+SURAT | Gujarat port city | Places
+KOCHI | Kerala port city | Places
+SIMLA | Himalayan hill town | Places
+ASSAM | north-eastern state | Places
+BIHAR | eastern state | Places
+
+# --- Modern & Play ---
+FILMI | Bollywood-dramatic | Modern & Play
+GULLY | street (gully cricket) | Modern & Play
+JADOO | magic | Modern & Play

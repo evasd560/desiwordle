@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desi Wordle — शर्डल</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Khand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#E4D3AC; --cream:#F4E7C6; --red:#C7402E; --red-lt:#D8543F;
+    --must:#E9A83C; --teal:#1F6E63; --brown:#6B4A2E; --grn:#3E7A46;
+    --fade:#C3AE8A; --fade-txt:#8F7B58; --sage:#8CA47F;
+    --tile:58px; --gap:8px; --perf:9px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--page);color:var(--brown);
+    font-family:"Khand",sans-serif;-webkit-font-smoothing:antialiased;}
+
+  /* ---------- floral border (50% opacity), outside the stamp ---------- */
+  .vine{position:fixed;z-index:0;opacity:.5;pointer-events:none;}
+  .vine.top,.vine.bot{left:0;right:0;height:56px;
+     background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDgiIGhlaWdodD0iNTYiIHZpZXdCb3g9IjAgMCAxNDggNTYiPjxwYXRoIGQ9Ik0wLDI4IFEzNywxNCA3NCwyOCBRMTExLDQyIDE0OCwyOCAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhDQTQ3RiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwyOCkiPjxnIHRyYW5zZm9ybT0ic2NhbGUoMC42KSI+PGVsbGlwc2UgY3g9IjcuMCIgY3k9IjAuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjQzc0MDJFIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDcuMCAwLjApIi8+PGVsbGlwc2UgY3g9IjQuOSIgY3k9IjQuOSIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjQzc0MDJFIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSA0LjkgNC45KSIvPjxlbGxpcHNlIGN4PSIwLjAiIGN5PSI3LjAiIHJ4PSI2IiByeT0iMyIgZmlsbD0iI0M3NDAyRSIgdHJhbnNmb3JtPSJyb3RhdGUoOTAgMC4wIDcuMCkiLz48ZWxsaXBzZSBjeD0iLTQuOSIgY3k9IjQuOSIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjQzc0MDJFIiB0cmFuc2Zvcm09InJvdGF0ZSgxMzUgLTQuOSA0LjkpIi8+PGVsbGlwc2UgY3g9Ii03LjAiIGN5PSIwLjAiIHJ4PSI2IiByeT0iMyIgZmlsbD0iI0M3NDAyRSIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIC03LjAgMC4wKSIvPjxlbGxpcHNlIGN4PSItNC45IiBjeT0iLTQuOSIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjQzc0MDJFIiB0cmFuc2Zvcm09InJvdGF0ZSgyMjUgLTQuOSAtNC45KSIvPjxlbGxpcHNlIGN4PSItMC4wIiBjeT0iLTcuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjQzc0MDJFIiB0cmFuc2Zvcm09InJvdGF0ZSgyNzAgLTAuMCAtNy4wKSIvPjxlbGxpcHNlIGN4PSI0LjkiIGN5PSItNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiNDNzQwMkUiIHRyYW5zZm9ybT0icm90YXRlKDMxNSA0LjkgLTQuOSkiLz48Y2lyY2xlIHI9IjQiIGZpbGw9IiNFOUE4M0MiLz48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc0LDI4KSByb3RhdGUoLTkwKSI+PGcgdHJhbnNmb3JtPSJzY2FsZSgwLjUpIj48cGF0aCBkPSJNMCwzNCBDMiwyMiAwLDEyIDAsMiIgc3Ryb2tlPSIjOENBNDdGIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz48ZWxsaXBzZSBjeD0iLTciIGN5PSIyNiIgcng9IjciIHJ5PSIzIiBmaWxsPSIjOENBNDdGIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzggLTcgMjYpIi8+PGVsbGlwc2UgY3g9IjciIGN5PSIyMCIgcng9IjciIHJ5PSIzIiBmaWxsPSIjOENBNDdGIiB0cmFuc2Zvcm09InJvdGF0ZSgzOCA3IDIwKSIvPjxlbGxpcHNlIGN4PSItNyIgY3k9IjE0IiByeD0iNyIgcnk9IjMiIGZpbGw9IiM4Q0E0N0YiIHRyYW5zZm9ybT0icm90YXRlKC0zOCAtNyAxNCkiLz48ZWxsaXBzZSBjeD0iNyIgY3k9IjgiIHJ4PSI3IiByeT0iMyIgZmlsbD0iIzhDQTQ3RiIgdHJhbnNmb3JtPSJyb3RhdGUoMzggNyA4KSIvPjxjaXJjbGUgY3k9IjAiIHI9IjQuNiIgZmlsbD0iI0M3NDAyRSIvPjxjaXJjbGUgY3k9IjAiIHI9IjEuOCIgZmlsbD0iI0U5QTgzQyIvPjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTQ4LDI4KSI+PGcgdHJhbnNmb3JtPSJzY2FsZSgwLjYpIj48ZWxsaXBzZSBjeD0iNy4wIiBjeT0iMC4wIiByeD0iNiIgcnk9IjMiIGZpbGw9IiMxRjZFNjMiIHRyYW5zZm9ybT0icm90YXRlKDAgNy4wIDAuMCkiLz48ZWxsaXBzZSBjeD0iNC45IiBjeT0iNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiMxRjZFNjMiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDQuOSA0LjkpIi8+PGVsbGlwc2UgY3g9IjAuMCIgY3k9IjcuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjMUY2RTYzIiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAwLjAgNy4wKSIvPjxlbGxpcHNlIGN4PSItNC45IiBjeT0iNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiMxRjZFNjMiIHRyYW5zZm9ybT0icm90YXRlKDEzNSAtNC45IDQuOSkiLz48ZWxsaXBzZSBjeD0iLTcuMCIgY3k9IjAuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjMUY2RTYzIiB0cmFuc2Zvcm09InJvdGF0ZSgxODAgLTcuMCAwLjApIi8+PGVsbGlwc2UgY3g9Ii00LjkiIGN5PSItNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiMxRjZFNjMiIHRyYW5zZm9ybT0icm90YXRlKDIyNSAtNC45IC00LjkpIi8+PGVsbGlwc2UgY3g9Ii0wLjAiIGN5PSItNy4wIiByeD0iNiIgcnk9IjMiIGZpbGw9IiMxRjZFNjMiIHRyYW5zZm9ybT0icm90YXRlKDI3MCAtMC4wIC03LjApIi8+PGVsbGlwc2UgY3g9IjQuOSIgY3k9Ii00LjkiIHJ4PSI2IiByeT0iMyIgZmlsbD0iIzFGNkU2MyIgdHJhbnNmb3JtPSJyb3RhdGUoMzE1IDQuOSAtNC45KSIvPjxjaXJjbGUgcj0iNCIgZmlsbD0iI0U5QTgzQyIvPjwvZz48L2c+PC9zdmc+");
+     background-repeat:repeat-x;background-size:148px 56px;}
+  .vine.top{top:0;} .vine.bot{bottom:0;transform:scaleY(-1);}
+  .vine.left,.vine.right{top:0;bottom:0;width:56px;
+     background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NiIgaGVpZ2h0PSIxNDgiIHZpZXdCb3g9IjAgMCA1NiAxNDgiPjxwYXRoIGQ9Ik0yOCwwIFExNCwzNyAyOCw3NCBRNDIsMTExIDI4LDE0OCAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhDQTQ3RiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgsMCkiPjxnIHRyYW5zZm9ybT0ic2NhbGUoMC42KSI+PGVsbGlwc2UgY3g9IjcuMCIgY3k9IjAuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjMUY2RTYzIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDcuMCAwLjApIi8+PGVsbGlwc2UgY3g9IjQuOSIgY3k9IjQuOSIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjMUY2RTYzIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSA0LjkgNC45KSIvPjxlbGxpcHNlIGN4PSIwLjAiIGN5PSI3LjAiIHJ4PSI2IiByeT0iMyIgZmlsbD0iIzFGNkU2MyIgdHJhbnNmb3JtPSJyb3RhdGUoOTAgMC4wIDcuMCkiLz48ZWxsaXBzZSBjeD0iLTQuOSIgY3k9IjQuOSIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjMUY2RTYzIiB0cmFuc2Zvcm09InJvdGF0ZSgxMzUgLTQuOSA0LjkpIi8+PGVsbGlwc2UgY3g9Ii03LjAiIGN5PSIwLjAiIHJ4PSI2IiByeT0iMyIgZmlsbD0iIzFGNkU2MyIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIC03LjAgMC4wKSIvPjxlbGxpcHNlIGN4PSItNC45IiBjeT0iLTQuOSIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjMUY2RTYzIiB0cmFuc2Zvcm09InJvdGF0ZSgyMjUgLTQuOSAtNC45KSIvPjxlbGxpcHNlIGN4PSItMC4wIiBjeT0iLTcuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjMUY2RTYzIiB0cmFuc2Zvcm09InJvdGF0ZSgyNzAgLTAuMCAtNy4wKSIvPjxlbGxpcHNlIGN4PSI0LjkiIGN5PSItNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiMxRjZFNjMiIHRyYW5zZm9ybT0icm90YXRlKDMxNSA0LjkgLTQuOSkiLz48Y2lyY2xlIHI9IjQiIGZpbGw9IiNFOUE4M0MiLz48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4LDc0KSI+PGcgdHJhbnNmb3JtPSJzY2FsZSgwLjUpIj48cGF0aCBkPSJNMCwzNCBDMiwyMiAwLDEyIDAsMiIgc3Ryb2tlPSIjOENBNDdGIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz48ZWxsaXBzZSBjeD0iLTciIGN5PSIyNiIgcng9IjciIHJ5PSIzIiBmaWxsPSIjOENBNDdGIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzggLTcgMjYpIi8+PGVsbGlwc2UgY3g9IjciIGN5PSIyMCIgcng9IjciIHJ5PSIzIiBmaWxsPSIjOENBNDdGIiB0cmFuc2Zvcm09InJvdGF0ZSgzOCA3IDIwKSIvPjxlbGxpcHNlIGN4PSItNyIgY3k9IjE0IiByeD0iNyIgcnk9IjMiIGZpbGw9IiM4Q0E0N0YiIHRyYW5zZm9ybT0icm90YXRlKC0zOCAtNyAxNCkiLz48ZWxsaXBzZSBjeD0iNyIgY3k9IjgiIHJ4PSI3IiByeT0iMyIgZmlsbD0iIzhDQTQ3RiIgdHJhbnNmb3JtPSJyb3RhdGUoMzggNyA4KSIvPjxjaXJjbGUgY3k9IjAiIHI9IjQuNiIgZmlsbD0iI0M3NDAyRSIvPjxjaXJjbGUgY3k9IjAiIHI9IjEuOCIgZmlsbD0iI0U5QTgzQyIvPjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgsMTQ4KSI+PGcgdHJhbnNmb3JtPSJzY2FsZSgwLjYpIj48ZWxsaXBzZSBjeD0iNy4wIiBjeT0iMC4wIiByeD0iNiIgcnk9IjMiIGZpbGw9IiNDNzQwMkUiIHRyYW5zZm9ybT0icm90YXRlKDAgNy4wIDAuMCkiLz48ZWxsaXBzZSBjeD0iNC45IiBjeT0iNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiNDNzQwMkUiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDQuOSA0LjkpIi8+PGVsbGlwc2UgY3g9IjAuMCIgY3k9IjcuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjQzc0MDJFIiB0cmFuc2Zvcm09InJvdGF0ZSg5MCAwLjAgNy4wKSIvPjxlbGxpcHNlIGN4PSItNC45IiBjeT0iNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiNDNzQwMkUiIHRyYW5zZm9ybT0icm90YXRlKDEzNSAtNC45IDQuOSkiLz48ZWxsaXBzZSBjeD0iLTcuMCIgY3k9IjAuMCIgcng9IjYiIHJ5PSIzIiBmaWxsPSIjQzc0MDJFIiB0cmFuc2Zvcm09InJvdGF0ZSgxODAgLTcuMCAwLjApIi8+PGVsbGlwc2UgY3g9Ii00LjkiIGN5PSItNC45IiByeD0iNiIgcnk9IjMiIGZpbGw9IiNDNzQwMkUiIHRyYW5zZm9ybT0icm90YXRlKDIyNSAtNC45IC00LjkpIi8+PGVsbGlwc2UgY3g9Ii0wLjAiIGN5PSItNy4wIiByeD0iNiIgcnk9IjMiIGZpbGw9IiNDNzQwMkUiIHRyYW5zZm9ybT0icm90YXRlKDI3MCAtMC4wIC03LjApIi8+PGVsbGlwc2UgY3g9IjQuOSIgY3k9Ii00LjkiIHJ4PSI2IiByeT0iMyIgZmlsbD0iI0M3NDAyRSIgdHJhbnNmb3JtPSJyb3RhdGUoMzE1IDQuOSAtNC45KSIvPjxjaXJjbGUgcj0iNCIgZmlsbD0iI0U5QTgzQyIvPjwvZz48L2c+PC9zdmc+");
+     background-repeat:repeat-y;background-size:56px 148px;}
+  .vine.left{left:0;} .vine.right{right:0;transform:scaleX(-1);}
+
+  .wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:64px 60px 64px;}
+
+  /* ---------- stamp ---------- */
+  .stampwrap{filter:drop-shadow(0 7px 16px rgba(107,74,46,.26));}
+  .stamp{--pr:9px; --ps:27px;
+     position:relative;background:var(--must);padding:15px;
+     -webkit-mask-image:
+        radial-gradient(circle var(--pr) at calc(var(--ps)/2) 0,    #0000 98%, #000 100%),
+        radial-gradient(circle var(--pr) at calc(var(--ps)/2) 100%, #0000 98%, #000 100%),
+        radial-gradient(circle var(--pr) at 0 calc(var(--ps)/2),    #0000 98%, #000 100%),
+        radial-gradient(circle var(--pr) at 100% calc(var(--ps)/2), #0000 98%, #000 100%);
+     -webkit-mask-size: var(--ps) 100%, var(--ps) 100%, 100% var(--ps), 100% var(--ps);
+     -webkit-mask-repeat: round no-repeat, round no-repeat, no-repeat round, no-repeat round;
+     -webkit-mask-composite: source-in;
+     mask-image:
+        radial-gradient(circle var(--pr) at calc(var(--ps)/2) 0,    #0000 98%, #000 100%),
+        radial-gradient(circle var(--pr) at calc(var(--ps)/2) 100%, #0000 98%, #000 100%),
+        radial-gradient(circle var(--pr) at 0 calc(var(--ps)/2),    #0000 98%, #000 100%),
+        radial-gradient(circle var(--pr) at 100% calc(var(--ps)/2), #0000 98%, #000 100%);
+     mask-size: var(--ps) 100%, var(--ps) 100%, 100% var(--ps), 100% var(--ps);
+     mask-repeat: round no-repeat, round no-repeat, no-repeat round, no-repeat round;
+     mask-composite: intersect;}
+  .inner{position:relative;background:var(--cream);border:3px solid var(--red);
+     border-radius:4px;padding:16px 14px 20px;overflow:hidden;}
+  .inner::after{content:"";position:absolute;inset:0;pointer-events:none;
+     background-image:radial-gradient(circle 1px at 2px 2px, rgba(107,74,46,.07) 1px, transparent 1px);
+     background-size:9px 9px;}
+
+  /* ---------- header ---------- */
+  .head{position:relative;border-radius:5px;overflow:hidden;padding:16px 12px 14px;text-align:center;
+     background:repeating-conic-gradient(from 0deg at 50% 64%,
+        var(--red) 0deg 6.43deg, var(--red-lt) 6.43deg 12.86deg);}
+  h1{--wm:clamp(32px,9vw,48px);
+     margin:0;line-height:1.1;color:var(--cream);
+     display:flex;align-items:baseline;justify-content:center;gap:.30em;
+     -webkit-text-stroke:2px var(--brown); paint-order:stroke fill;}
+  h1 .en{font-family:"Khand",sans-serif;font-weight:700;
+     font-size:var(--wm);letter-spacing:1px;}
+  /* Devanagari sits ~21% taller at equal size, so scale it down to match */
+  h1 .dv{font-family:"Khand",sans-serif;font-weight:700;
+     font-size:calc(var(--wm) * 0.826);letter-spacing:.5px;}
+  .est{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;}
+  .est span{font-family:"Khand",sans-serif;font-weight:600;font-size:12.5px;
+     letter-spacing:3px;color:#F5E3C0;white-space:nowrap;}
+  .est i{display:block;height:2px;flex:0 1 74px;min-width:26px;
+     background:#EFD3A6;opacity:.9;border-radius:2px;}
+
+  /* ---------- board ---------- */
+  #board{display:grid;grid-template-rows:repeat(6,var(--tile));gap:var(--gap);
+     justify-content:center;margin:18px 0 10px;}
+  .brow{display:grid;grid-template-columns:repeat(5,var(--tile));gap:var(--gap);}
+  .tile{width:var(--tile);height:var(--tile);border-radius:5px;position:relative;
+     display:flex;align-items:center;justify-content:center;
+     font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:36px;letter-spacing:1px;
+     text-transform:uppercase;background:var(--cream);border:2px solid var(--red);color:var(--brown);}
+  .tile::before{content:"";position:absolute;inset:5px;border:1.2px solid var(--teal);
+     border-radius:3px;opacity:.85;}
+  .tile.filled{border-color:var(--brown);}
+  .tile.correct,.tile.present,.tile.absent{border-color:var(--brown);}
+  .tile.correct::before,.tile.present::before,.tile.absent::before{display:none;}
+  .tile.correct{background:var(--grn);color:var(--cream);}
+  .tile.present{background:var(--must);color:var(--brown);}
+  .tile.absent {background:var(--fade);color:var(--fade-txt);}
+  .tile.reveal{animation:flip .5s ease forwards;}
+  .brow.shake{animation:shake .4s ease;}
+  @keyframes flip{0%{transform:rotateX(0)}50%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}
+     40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+  #message{min-height:24px;text-align:center;font-family:"Alfa Slab One",serif;
+     font-weight:400;font-size:16px;letter-spacing:.5px;color:var(--red);
+     text-transform:uppercase;padding-top:2px;}
+  #message.win{color:var(--grn);}
+  .share-btn{display:none;margin:6px auto 0;background:var(--red);color:var(--cream);
+     border:2px solid var(--brown);font-family:"Alfa Slab One",serif;font-weight:400;
+     font-size:13px;letter-spacing:1.5px;padding:9px 20px;border-radius:4px;cursor:pointer;
+     text-transform:uppercase;}
+  .share-btn:active{transform:translateY(2px);}
+
+  /* ---------- keyboard ---------- */
+  #keyboard{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+  .krow{display:flex;justify-content:center;gap:5px;}
+  .key{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:22px;letter-spacing:.5px;
+     min-width:26px;height:44px;padding:0 3px;border-radius:4px;cursor:pointer;
+     background:var(--cream);border:1.6px solid var(--brown);color:var(--red);
+     display:flex;align-items:center;justify-content:center;flex:1;user-select:none;
+     transition:background .2s;}
+  .key:active{transform:translateY(2px);}
+  .key.wide{flex:1.5;font-size:12px;letter-spacing:1px;}
+  .key.correct{background:var(--grn);color:var(--cream);}
+  .key.present{background:var(--must);color:var(--brown);}
+  .key.absent {background:var(--fade);color:var(--fade-txt);}
+
+  /* ---------- loader + footer ---------- */
+  .loader{text-align:center;padding:18px 8px;font-weight:600;font-size:15px;
+     color:var(--brown);line-height:1.5;}
+  .loader.err{color:var(--red);}
+  .loadbtn{display:inline-block;margin-top:10px;background:var(--red);color:var(--cream);
+     border:2px solid var(--brown);font-weight:700;letter-spacing:2px;text-transform:uppercase;
+     font-size:13px;padding:9px 18px;border-radius:4px;cursor:pointer;}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:60;}
+  .success{display:none;margin:10px auto 0;max-width:300px;text-align:center;
+     border:2px dashed var(--grn);border-radius:6px;padding:10px 14px 12px;
+     background:repeating-linear-gradient(45deg,rgba(62,122,70,.07),rgba(62,122,70,.07) 9px,
+        rgba(62,122,70,.13) 9px,rgba(62,122,70,.13) 18px);}
+  .success.show{display:block;animation:pop .35s ease;}
+  @keyframes pop{0%{transform:scale(.88);opacity:0}100%{transform:scale(1);opacity:1}}
+  .success .ribbon{display:inline-block;background:var(--grn);color:var(--cream);
+     font-family:"Alfa Slab One",serif;font-size:11px;letter-spacing:2px;
+     padding:4px 14px;border-radius:3px;text-transform:uppercase;}
+  .success .sword{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:4px;
+     color:var(--brown);margin-top:7px;line-height:1;}
+  .success .smean{font-family:"Khand",sans-serif;font-weight:600;font-size:12.5px;
+     color:var(--fade-txt);letter-spacing:1px;margin-top:2px;}
+  .success .smeta{font-family:"Khand",sans-serif;font-weight:700;font-size:12px;
+     letter-spacing:2px;color:var(--grn);margin-top:5px;text-transform:uppercase;}
+  .footer{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+     margin-top:14px;font-size:11.5px;letter-spacing:2px;color:var(--brown);
+     text-transform:uppercase;font-weight:600;opacity:.75;}
+  .refresh{font-family:"Khand",sans-serif;font-weight:700;text-transform:uppercase;
+     letter-spacing:2px;font-size:11.5px;color:var(--teal);background:var(--cream);
+     border:1.5px solid var(--teal);padding:5px 12px;border-radius:4px;cursor:pointer;}
+  .refresh:active{transform:translateY(1px);}
+  @media (max-width:520px){
+    :root{--tile:48px;--gap:5px;}
+    .wrap{padding:44px 30px;}
+    .inner{padding:12px 8px 16px;}
+    .krow{gap:3px;}
+    .key{height:40px;font-size:16px;min-width:0;padding:0;border-width:1.4px;}
+    .key.wide{flex:1.4;font-size:9.5px;letter-spacing:0;}
+    .est span{font-size:10.5px;letter-spacing:2px;}
+    .est i{flex-basis:36px;min-width:16px;}
+    .footer{gap:8px;font-size:10.5px;letter-spacing:1px;}
+  }
+  @media (max-width:380px){
+    :root{--tile:44px;--gap:4px;}
+    .wrap{padding:40px 22px;}
+    .key{height:36px;font-size:14px;}
+  }
+  @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important;} }
+</style>
+</head>
+<body>
+<div class="vine top"></div><div class="vine bot"></div>
+<div class="vine left"></div><div class="vine right"></div>
+
+<div class="wrap">
+  <div class="stampwrap"><div class="stamp">
+    <div class="inner">
+      <header class="head">
+        <h1><span class="en">Wordle</span><span class="dv" lang="hi">शर्डल</span></h1>
+        <div class="est"><i></i><span>MADE IN INDIA · EST. 2026</span><i></i></div>
+      </header>
+
+      <div class="loader" id="loader">
+        <span id="loaderMsg">Loading word bank…</span><br>
+        <label class="loadbtn" id="loadWrap" style="display:none">Choose word-bank file
+          <input type="file" id="fileInput" accept=".txt,text/plain" hidden>
+        </label>
+      </div>
+
+      <div id="board"></div>
+      <div id="message"></div>
+      <div class="success" id="success">
+        <span class="ribbon" id="sRibbon">Solved</span>
+        <div class="sword" id="sWord"></div>
+        <div class="smean" id="sMean"></div>
+        <div class="smeta" id="sMeta"></div>
+      </div>
+      <button class="share-btn" id="share">Share result</button>
+      <div id="keyboard"></div>
+
+      <div class="footer">
+        <span id="dayLabel"></span>
+        <button class="refresh" id="refreshBtn" type="button">New word</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* Daily word rolls over at midnight IST, so everyone gets the same word
+   regardless of the timezone they are playing from. */
+const IST_OFFSET=5.5*3600000;
+const istNow=new Date(Date.now()+IST_OFFSET);
+const today=istNow;
+const dayNum=Math.floor((Date.UTC(istNow.getUTCFullYear(),istNow.getUTCMonth(),istNow.getUTCDate())
+                         - Date.UTC(2024,0,1))/86400000);
+const ROWS=6, LEN=5;
+
+const boardEl=document.getElementById('board');
+const msgEl=document.getElementById('message');
+const shareBtn=document.getElementById('share');
+const grid=Array.from({length:ROWS},()=>Array(LEN).fill(''));
+const results=[];
+let row=0,col=0,over=false,ready=false,isDaily=true;
+const guesses=[];
+let BANK=[],WORDS=[],ANSWER='',todayIndex=0;
+
+for(let r=0;r<ROWS;r++){const rEl=document.createElement('div');rEl.className='brow';
+  for(let c=0;c<LEN;c++){const t=document.createElement('div');t.className='tile';t.id=`t${r}-${c}`;rEl.appendChild(t);}
+  boardEl.appendChild(rEl);}
+
+const kb=document.getElementById('keyboard');
+let krow=document.createElement('div');krow.className='krow';
+function pushRow(){kb.appendChild(krow);krow=document.createElement('div');krow.className='krow';}
+function addKey(label,wide){const k=document.createElement('div');k.className='key'+(wide?' wide':'');
+  k.textContent=label;k.dataset.k=label;k.onclick=()=>handle(label);krow.appendChild(k);}
+[["QWERTYUIOP"],["ASDFGHJKL"],["ENTER","ZXCVBNM","DEL"]].forEach((seg,i)=>{
+  if(i===2){addKey("ENTER",true);for(const ch of seg[1])addKey(ch,false);addKey("DEL",true);}
+  else{for(const ch of seg[0])addKey(ch,false);}pushRow();});
+const keyEls={};document.querySelectorAll('.key').forEach(k=>keyEls[k.dataset.k]=k);
+
+function handle(k){
+  if(!ready||over) return;
+  if(k==='ENTER') return submit();
+  if(k==='DEL'||k==='BACKSPACE'){ if(col>0){col--;grid[row][col]='';paint(row,col,'');} return; }
+  if(/^[A-Z]$/.test(k) && col<LEN){ grid[row][col]=k; paint(row,col,k); col++; }
+}
+function paint(r,c,ch){const t=document.getElementById(`t${r}-${c}`);t.textContent=ch;t.classList.toggle('filled',!!ch);}
+function score(guess){const res=Array(LEN).fill('absent');const a=ANSWER.split('');const used=Array(LEN).fill(false);
+  for(let i=0;i<LEN;i++){if(guess[i]===a[i]){res[i]='correct';used[i]=true;}}
+  for(let i=0;i<LEN;i++){if(res[i]==='correct')continue;
+    for(let j=0;j<LEN;j++){if(!used[j]&&guess[i]===a[j]){res[i]='present';used[j]=true;break;}}}return res;}
+function submit(){
+  if(col<LEN){flash("Not enough letters");shake();return;}
+  const guess=grid[row].join('');const res=score(guess);results.push(res);
+  const rank={absent:0,present:1,correct:2};
+  for(let c=0;c<LEN;c++){const t=document.getElementById(`t${row}-${c}`);
+    setTimeout(()=>{t.classList.add('reveal');
+      setTimeout(()=>{t.classList.add(res[c]);t.classList.remove('filled');},220);
+      const ke=keyEls[grid[row][c]];
+      if(ke){const cur=ke.classList.contains('correct')?2:ke.classList.contains('present')?1:ke.classList.contains('absent')?0:-1;
+        if(rank[res[c]]>cur){ke.classList.remove('correct','present','absent');ke.classList.add(res[c]);}}
+    },c*260);}
+  guesses.push(guess);
+  const win=guess===ANSWER;
+  setTimeout(()=>{
+    if(win){ endGame(true,true); }
+    else{ row++;col=0;
+      if(row>=ROWS){ endGame(false,true); }
+      else { persist(); }
+    }
+  }, LEN*260+260);
+}
+function meaningOf(w){const e=BANK.find(x=>x[0]===w);return e&&e[1]?e[1]:'';}
+function endGame(won,fresh){
+  over=true;
+  if(won){
+    msgEl.textContent=["Shabaash!","Wah wah!","Ekdum sahi!","Kya baat!"][Math.min(guesses.length-1,3)];
+    msgEl.classList.add('win');
+    showSuccess(true);
+    if(fresh) confettiBurst();
+  } else {
+    msgEl.classList.remove('win');
+    msgEl.textContent='Kal phir!';
+    showSuccess(false);
+  }
+  showShare(); persist();
+}
+function showSuccess(won){
+  const box=document.getElementById('success');
+  document.getElementById('sRibbon').textContent = won ? 'Solved' : 'Aaj ka shabd';
+  document.getElementById('sRibbon').style.background = won ? 'var(--grn)' : 'var(--red)';
+  document.getElementById('sWord').textContent = ANSWER;
+  document.getElementById('sMean').textContent = meaningOf(ANSWER);
+  document.getElementById('sMeta').textContent = won
+    ? `${guesses.length} / ${ROWS} guesses` : `Better luck kal!`;
+  box.style.borderColor = won ? 'var(--grn)' : 'var(--red)';
+  box.classList.add('show');
+}
+function confettiBurst(){
+  try{
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cv=document.getElementById('confetti'), ctx=cv.getContext('2d');
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const fit=()=>{cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);};
+    fit(); addEventListener('resize',fit,{once:true});
+    const cols=['#C7402E','#E9A83C','#3E7A46','#1F6E63','#F4E7C6','#D8543F'];
+    const P=[];
+    for(let i=0;i<150;i++)P.push({
+      x:Math.random()*innerWidth, y:-20-Math.random()*300,
+      w:5+Math.random()*7, h:8+Math.random()*10, c:cols[i%cols.length],
+      vy:3.4+Math.random()*4.2, vx:-1.3+Math.random()*2.6,
+      rot:Math.random()*Math.PI, vr:-0.16+Math.random()*0.32, sway:Math.random()*6.28});
+    const t0=performance.now();
+    (function frame(now){
+      const el=now-t0, fade=el>3400?Math.max(0,1-(el-3400)/1400):1;
+      ctx.clearRect(0,0,innerWidth,innerHeight);
+      let alive=false;
+      for(const p of P){
+        p.sway+=0.05; p.x+=p.vx+Math.sin(p.sway)*0.8; p.y+=p.vy; p.rot+=p.vr;
+        if(p.y<innerHeight+50) alive=true;
+        ctx.save(); ctx.globalAlpha=fade; ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        ctx.fillStyle=p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+      }
+      if(alive&&fade>0) requestAnimationFrame(frame);
+      else ctx.clearRect(0,0,innerWidth,innerHeight);
+    })(t0);
+  }catch(e){}
+}
+/* ---------- progress saving (daily game only) ---------- */
+const SKEY='desiwordle:v1';
+function persist(){
+  if(!isDaily) return;
+  try{ localStorage.setItem(SKEY, JSON.stringify({d:dayNum,w:ANSWER,g:guesses,done:over})); }catch(e){}
+}
+function restore(){
+  let st=null;
+  try{ st=JSON.parse(localStorage.getItem(SKEY)||'null'); }catch(e){ return false; }
+  if(!st || st.d!==dayNum || st.w!==ANSWER || !Array.isArray(st.g) || !st.g.length) return false;
+  const rank={absent:0,present:1,correct:2};
+  st.g.slice(0,ROWS).forEach((g,r)=>{
+    if(!/^[A-Z]{5}$/.test(g)) return;
+    guesses.push(g);
+    const res=score(g); results.push(res);
+    for(let c=0;c<LEN;c++){
+      grid[r][c]=g[c];
+      const t=document.getElementById(`t${r}-${c}`);
+      t.textContent=g[c]; t.classList.add(res[c]);
+      const ke=keyEls[g[c]];
+      if(ke){const cur=ke.classList.contains('correct')?2:ke.classList.contains('present')?1:
+              ke.classList.contains('absent')?0:-1;
+        if(rank[res[c]]>cur){ke.classList.remove('correct','present','absent');ke.classList.add(res[c]);}}
+    }
+  });
+  const solved=guesses[guesses.length-1]===ANSWER;
+  if(solved){ row=guesses.length; endGame(true,false); }
+  else if(guesses.length>=ROWS){ row=ROWS; endGame(false,false); }
+  else { row=guesses.length; col=0; }
+  return true;
+}
+function flash(m){msgEl.classList.remove('win');msgEl.textContent=m;setTimeout(()=>{if(!over)msgEl.textContent='';},1200);}
+function shake(){const r=boardEl.children[row];r.classList.add('shake');setTimeout(()=>r.classList.remove('shake'),400);}
+function showShare(){shareBtn.style.display='block';
+  shareBtn.onclick=()=>{const emo={correct:'🟩',present:'🟧',absent:'⬛'};
+    const solved=results.some(r=>r.every(x=>x==='correct'));
+    const head=`Desi Wordle #${dayNum} ${solved?results.length:'X'}/6`;
+    const body=results.map(r=>r.map(x=>emo[x]).join('')).join('\n');
+    const text=head+'\n\n'+body+'\n\nplay the desi wordle';
+    navigator.clipboard?.writeText(text).then(()=>{const o=shareBtn.textContent;shareBtn.textContent='Copied!';
+      setTimeout(()=>shareBtn.textContent=o,1500);}).catch(()=>flash("Couldn't copy"));};}
+document.addEventListener('keydown',e=>{const k=e.key.toUpperCase();
+  if(k==='ENTER'||k==='BACKSPACE'||/^[A-Z]$/.test(k)){if(k.length===1||k==='ENTER'||k==='BACKSPACE'){handle(k==='BACKSPACE'?'DEL':k);}}});
+
+document.getElementById('dayLabel').textContent=`No. ${dayNum} · ${istNow.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})}`;
+
+function resetBoard(){
+  over=false;row=0;col=0;results.length=0;guesses.length=0;
+  document.getElementById('success').classList.remove('show');
+  for(let r=0;r<ROWS;r++)for(let c=0;c<LEN;c++){grid[r][c]='';
+    const t=document.getElementById(`t${r}-${c}`);t.textContent='';t.className='tile';}
+  Object.entries(keyEls).forEach(([label,k])=>{k.classList.remove('correct','present','absent');k.textContent=label;});
+  msgEl.textContent='';msgEl.classList.remove('win');shareBtn.style.display='none';
+}
+function newWord(){
+  if(!WORDS.length) return;
+  let i=Math.floor(Math.random()*WORDS.length);
+  if(WORDS.length>1){ while(WORDS[i]===ANSWER) i=Math.floor(Math.random()*WORDS.length); }
+  ANSWER=WORDS[i]; isDaily=false; resetBoard();
+  const rb=document.getElementById('refreshBtn'); if(rb) rb.blur();
+}
+document.getElementById('refreshBtn').onclick=newWord;
+
+function parseWords(text){
+  const seen=new Set(); const out=[];
+  for(let ln of text.split(/\r?\n/)){
+    ln=ln.trim(); if(!ln||ln.startsWith('#')) continue;
+    const p=ln.split('|').map(s=>s.trim());
+    const w=(p[0]||'').toUpperCase();
+    if(!/^[A-Z]{5}$/.test(w)||seen.has(w)) continue;
+    seen.add(w); out.push([w, p[1]||'', p[2]||'Words']);
+  }
+  return out;
+}
+function startGame(parsed){
+  BANK=parsed; WORDS=BANK.map(x=>x[0]);
+  const loader=document.getElementById('loader');
+  if(!WORDS.length){ loader.className='loader err';
+    document.getElementById('loaderMsg').textContent='No valid 5-letter words found in that file.'; return; }
+  todayIndex=((dayNum%WORDS.length)+WORDS.length)%WORDS.length;
+  ANSWER=WORDS[todayIndex];
+  loader.style.display='none';
+  ready=true;
+  restore();
+}
+function showPicker(){
+  const loader=document.getElementById('loader');
+  document.getElementById('loaderMsg').innerHTML=
+    "Couldn't auto-load <b>desiwordle_words.txt</b> (browsers block reading local files directly).<br>Pick the file to start:";
+  document.getElementById('loadWrap').style.display='inline-block';
+  document.getElementById('fileInput').onchange=e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const rd=new FileReader();
+    rd.onload=()=>{loader.className='loader';startGame(parseWords(rd.result));};
+    rd.readAsText(f);
+  };
+}
+(async function init(){
+  try{
+    const r=await fetch('desiwordle_words.txt',{cache:'no-store'});
+    if(!r.ok) throw new Error('http '+r.status);
+    startGame(parseWords(await r.text()));
+  }catch(err){ showPicker(); }
+})();
+</script>
+</body>
+</html>
