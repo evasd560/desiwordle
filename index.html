@@ -129,6 +129,59 @@
   .loadbtn{display:inline-block;margin-top:10px;background:var(--red);color:var(--cream);
      border:2px solid var(--brown);font-weight:700;letter-spacing:2px;text-transform:uppercase;
      font-size:13px;padding:9px 18px;border-radius:4px;cursor:pointer;}
+  #keyboard.hidden{display:none;}
+  .phrase{display:inline-block;background:var(--grn);color:var(--cream);
+     font-family:"Alfa Slab One",serif;font-size:14px;letter-spacing:1px;
+     padding:6px 16px;border-radius:3px;}
+  .success .streak{margin-top:8px;padding-top:7px;border-top:1px dashed rgba(107,74,46,.28);
+     font-family:"Khand",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.8px;
+     color:var(--brown);text-transform:uppercase;display:flex;justify-content:center;
+     gap:7px;flex-wrap:wrap;line-height:1.35;}
+  .success .streak b{color:var(--red);font-weight:700;}
+  /* stats button + modal */
+  .statsbtn{display:inline-flex;align-items:center;gap:5px;font-family:"Khand",sans-serif;
+     font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:11.5px;
+     color:var(--red);background:var(--cream);border:1.5px solid var(--red);
+     padding:5px 11px;border-radius:4px;cursor:pointer;}
+  .statsbtn:active{transform:translateY(1px);}
+  .statsbtn svg{display:block;}
+  .overlay{position:fixed;inset:0;background:rgba(58,36,28,.55);z-index:70;
+     display:none;align-items:center;justify-content:center;padding:18px;}
+  .overlay.show{display:flex;}
+  .modal{position:relative;width:100%;max-width:340px;max-height:88vh;overflow:auto;
+     background:var(--cream);border:3px solid var(--red);border-radius:6px;
+     box-shadow:0 14px 40px rgba(58,36,28,.4);animation:pop .28s ease;}
+  .modal .mhead{background:var(--must);border-bottom:2px solid var(--red);
+     padding:9px 12px;text-align:center;font-family:"Alfa Slab One",serif;
+     font-size:12px;letter-spacing:2px;color:var(--brown);text-transform:uppercase;}
+  .modal .mbody{padding:14px 16px 18px;text-align:center;}
+  .modal .close{position:absolute;top:6px;right:9px;border:none;background:none;cursor:pointer;
+     font-family:"Khand",sans-serif;font-weight:700;font-size:21px;line-height:1;color:var(--brown);}
+  .mword{font-family:"Bebas Neue",sans-serif;font-size:32px;letter-spacing:4px;
+     color:var(--brown);line-height:1;margin-top:8px;}
+  .mmean{font-family:"Khand",sans-serif;font-weight:600;font-size:12.5px;
+     color:var(--fade-txt);letter-spacing:1px;}
+  .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0 6px;}
+  .mgrid div{background:rgba(233,168,60,.16);border-radius:4px;padding:7px 2px;}
+  .mgrid .n{font-family:"Bebas Neue",sans-serif;font-size:23px;color:var(--red);line-height:1;}
+  .mgrid .l{font-family:"Khand",sans-serif;font-weight:600;font-size:9.5px;
+     letter-spacing:1px;color:var(--brown);text-transform:uppercase;margin-top:2px;}
+  .dhead{font-family:"Khand",sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;
+     color:var(--brown);text-transform:uppercase;margin:12px 0 7px;
+     display:flex;align-items:center;gap:8px;}
+  .dhead::before,.dhead::after{content:"";flex:1;height:1px;background:var(--fade);}
+  .drow{display:flex;align-items:center;gap:7px;margin-bottom:4px;}
+  .drow .k{font-family:"Bebas Neue",sans-serif;font-size:15px;color:var(--brown);width:11px;}
+  .drow .bar{height:19px;border-radius:3px;background:var(--fade);min-width:20px;
+     display:flex;align-items:center;justify-content:flex-end;padding:0 6px;
+     font-family:"Bebas Neue",sans-serif;font-size:13px;color:var(--cream);
+     transition:width .5s ease;}
+  .drow.on .bar{background:var(--grn);}
+  .dnote{font-family:"Khand",sans-serif;font-weight:600;font-size:10.5px;color:var(--fade-txt);
+     letter-spacing:.5px;margin-top:9px;}
+  .mshare{margin-top:12px;background:var(--red);color:var(--cream);border:2px solid var(--brown);
+     font-family:"Alfa Slab One",serif;font-size:12px;letter-spacing:1.5px;padding:9px 18px;
+     border-radius:4px;cursor:pointer;text-transform:uppercase;}
   #confetti{position:fixed;inset:0;pointer-events:none;z-index:60;}
   .success{display:none;margin:10px auto 0;max-width:300px;text-align:center;
      border:2px dashed var(--grn);border-radius:6px;padding:10px 14px 12px;
@@ -136,10 +189,7 @@
         rgba(62,122,70,.13) 9px,rgba(62,122,70,.13) 18px);}
   .success.show{display:block;animation:pop .35s ease;}
   @keyframes pop{0%{transform:scale(.88);opacity:0}100%{transform:scale(1);opacity:1}}
-  .success .ribbon{display:inline-block;background:var(--grn);color:var(--cream);
-     font-family:"Alfa Slab One",serif;font-size:11px;letter-spacing:2px;
-     padding:4px 14px;border-radius:3px;text-transform:uppercase;}
-  .success .sword{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:4px;
+    .success .sword{font-family:"Bebas Neue",sans-serif;font-size:34px;letter-spacing:4px;
      color:var(--brown);margin-top:7px;line-height:1;}
   .success .smean{font-family:"Khand",sans-serif;font-weight:600;font-size:12.5px;
      color:var(--fade-txt);letter-spacing:1px;margin-top:2px;}
@@ -193,10 +243,11 @@
       <div id="board"></div>
       <div id="message"></div>
       <div class="success" id="success">
-        <span class="ribbon" id="sRibbon">Solved</span>
+        <span class="phrase" id="sPhrase"></span>
         <div class="sword" id="sWord"></div>
         <div class="smean" id="sMean"></div>
         <div class="smeta" id="sMeta"></div>
+        <div class="streak" id="sStreak"></div>
       </div>
       <button class="share-btn" id="share">Share result</button>
       <div id="keyboard"></div>
@@ -204,9 +255,34 @@
       <div class="footer">
         <span id="dayLabel"></span>
         <button class="refresh" id="refreshBtn" type="button">New word</button>
+        <button class="statsbtn" id="statsBtn" type="button" aria-label="Statistics">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="2" y="13" width="5" height="9" rx="1"/><rect x="9.5" y="7" width="5" height="15" rx="1"/>
+            <rect x="17" y="2" width="5" height="20" rx="1"/></svg>
+          Stats
+        </button>
       </div>
     </div>
   </div></div>
+</div>
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Statistics">
+    <button class="close" id="mClose" aria-label="Close">&times;</button>
+    <div class="mhead" id="mHead">Statistics</div>
+    <div class="mbody">
+      <div id="mResult"></div>
+      <div class="mgrid">
+        <div><div class="n" id="stPlayed">0</div><div class="l">Played</div></div>
+        <div><div class="n" id="stWin">0%</div><div class="l">Win</div></div>
+        <div><div class="n" id="stStreak">0</div><div class="l">Streak</div></div>
+        <div><div class="n" id="stBest">0</div><div class="l">Best</div></div>
+      </div>
+      <div class="dhead">Guess distribution</div>
+      <div id="mDist"></div>
+      <div class="dnote" id="mNote"></div>
+      <button class="mshare" id="mShare">Share result</button>
+    </div>
+  </div>
 </div>
 <canvas id="confetti"></canvas>
 
@@ -278,26 +354,33 @@ function submit(){
 function meaningOf(w){const e=BANK.find(x=>x[0]===w);return e&&e[1]?e[1]:'';}
 function endGame(won,fresh){
   over=true;
-  if(won){
-    msgEl.textContent=["Shabaash!","Wah wah!","Ekdum sahi!","Kya baat!"][Math.min(guesses.length-1,3)];
-    msgEl.classList.add('win');
-    showSuccess(true);
-    if(fresh) confettiBurst();
-  } else {
-    msgEl.classList.remove('win');
-    msgEl.textContent='Kal phir!';
-    showSuccess(false);
-  }
+  msgEl.textContent=''; msgEl.classList.remove('win');
+  if(isDaily && fresh) recordResult(won);
+  showSuccess(won);
+  document.getElementById('keyboard').classList.add('hidden');   // redundant once solved
+  if(won && fresh) confettiBurst();
   showShare(); persist();
+  if(isDaily) setTimeout(openStats, fresh?1100:250);
 }
 function showSuccess(won){
   const box=document.getElementById('success');
-  document.getElementById('sRibbon').textContent = won ? 'Solved' : 'Aaj ka shabd';
-  document.getElementById('sRibbon').style.background = won ? 'var(--grn)' : 'var(--red)';
+  const ph=document.getElementById('sPhrase');
+  ph.textContent = won ? WIN_PHRASES[Math.floor(Math.random()*WIN_PHRASES.length)] : 'Kal phir!';
+  ph.style.background = won ? 'var(--grn)' : 'var(--red)';
   document.getElementById('sWord').textContent = ANSWER;
   document.getElementById('sMean').textContent = meaningOf(ANSWER);
   document.getElementById('sMeta').textContent = won
-    ? `${guesses.length} / ${ROWS} guesses` : `Better luck kal!`;
+    ? `${guesses.length} / ${ROWS} guesses` : 'Better luck kal!';
+  const sEl=document.getElementById('sStreak');
+  if(isDaily){
+    const st=currentStats();
+    const rate=st.played?Math.round(st.wins/st.played*100):0;
+    sEl.innerHTML=`<span>\u{1F525} Streak <b>${st.streak}</b></span>`
+                 +`<span>Best <b>${st.best}</b></span>`
+                 +`<span>Played <b>${st.played}</b></span>`
+                 +`<span>Win <b>${rate}%</b></span>`;
+    sEl.style.display='flex';
+  } else { sEl.style.display='none'; }
   box.style.borderColor = won ? 'var(--grn)' : 'var(--red)';
   box.classList.add('show');
 }
@@ -310,10 +393,10 @@ function confettiBurst(){
     fit(); addEventListener('resize',fit,{once:true});
     const cols=['#C7402E','#E9A83C','#3E7A46','#1F6E63','#F4E7C6','#D8543F'];
     const P=[];
-    for(let i=0;i<150;i++)P.push({
+    for(let i=0;i<58;i++)P.push({
       x:Math.random()*innerWidth, y:-20-Math.random()*300,
-      w:5+Math.random()*7, h:8+Math.random()*10, c:cols[i%cols.length],
-      vy:3.4+Math.random()*4.2, vx:-1.3+Math.random()*2.6,
+      w:4+Math.random()*4, h:6+Math.random()*6, c:cols[i%cols.length],
+      vy:2.0+Math.random()*2.4, vx:-0.8+Math.random()*1.6,
       rot:Math.random()*Math.PI, vr:-0.16+Math.random()*0.32, sway:Math.random()*6.28});
     const t0=performance.now();
     (function frame(now){
@@ -323,7 +406,7 @@ function confettiBurst(){
       for(const p of P){
         p.sway+=0.05; p.x+=p.vx+Math.sin(p.sway)*0.8; p.y+=p.vy; p.rot+=p.vr;
         if(p.y<innerHeight+50) alive=true;
-        ctx.save(); ctx.globalAlpha=fade; ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        ctx.save(); ctx.globalAlpha=fade*0.72; ctx.translate(p.x,p.y); ctx.rotate(p.rot);
         ctx.fillStyle=p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
       }
       if(alive&&fade>0) requestAnimationFrame(frame);
@@ -331,8 +414,79 @@ function confettiBurst(){
     })(t0);
   }catch(e){}
 }
+/* ---------- stats modal ---------- */
+function renderStats(){
+  const st=currentStats();
+  const done = isDaily && over;
+  document.getElementById('mHead').textContent = done ? 'Aaj ka result' : 'Statistics';
+  const res=document.getElementById('mResult');
+  if(done){
+    const won=guesses[guesses.length-1]===ANSWER;
+    res.innerHTML=`<span class="phrase" style="background:${won?'var(--grn)':'var(--red)'}">`
+      +`${document.getElementById('sPhrase').textContent}</span>`
+      +`<div class="mword">${ANSWER}</div>`
+      +`<div class="mmean">${meaningOf(ANSWER)}</div>`;
+    res.style.display='block';
+  } else { res.innerHTML=''; res.style.display='none'; }
+  document.getElementById('stPlayed').textContent=st.played;
+  document.getElementById('stWin').textContent=(st.played?Math.round(st.wins/st.played*100):0)+'%';
+  document.getElementById('stStreak').textContent=st.streak;
+  document.getElementById('stBest').textContent=st.best;
+  const dist=st.dist||[0,0,0,0,0,0];
+  const max=Math.max(1,...dist);
+  const mine=(done && guesses[guesses.length-1]===ANSWER) ? guesses.length : 0;
+  document.getElementById('mDist').innerHTML=dist.map((n,i)=>{
+    const w=Math.max(9, Math.round(n/max*100));
+    return `<div class="drow${mine===i+1?' on':''}"><span class="k">${i+1}</span>`
+         + `<span class="bar" style="width:${w}%">${n}</span></div>`;
+  }).join('');
+  document.getElementById('mNote').textContent =
+    dist.some(n=>n>0) ? 'Counts daily words only.' : 'Play a few days to fill this in.';
+  document.getElementById('mShare').style.display = (isDaily && over) ? 'inline-block' : 'none';
+}
+function openStats(){ renderStats(); document.getElementById('overlay').classList.add('show'); }
+function closeStats(){ document.getElementById('overlay').classList.remove('show'); }
+document.getElementById('statsBtn').onclick=()=>{openStats();document.getElementById('statsBtn').blur();};
+document.getElementById('mClose').onclick=closeStats;
+document.getElementById('overlay').onclick=e=>{ if(e.target.id==='overlay') closeStats(); };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeStats(); });
+
 /* ---------- progress saving (daily game only) ---------- */
 const SKEY='desiwordle:v1';
+const STATKEY='desiwordle:stats:v1';
+/* Auto-detects the live URL once hosted; edit the fallback if you want a fixed link. */
+const GAME_URL = location.protocol.indexOf('http')===0
+  ? location.origin+location.pathname
+  : 'https://your-username.github.io/desiwordle/';
+const EMO={correct:'\u{1FA94}',present:'\u{1F33C}',absent:'\u{1F965}'};
+const WIN_PHRASES=["Kya baat!","Shabaash!","Wah wah!","Ekdum sahi!","Zabardast!",
+  "Kamaal kar diya!","Ekdum jhakaas!","Sahi pakde hain!","Balle balle!","Mast!","Bilkul theek!"];
+function loadStats(){
+  try{const r=JSON.parse(localStorage.getItem(STATKEY)||'null');
+    const d={played:0,wins:0,streak:0,best:0,lastDay:null,dist:[0,0,0,0,0,0]};
+    if(!r||typeof r!=='object') return d;
+    if(!Array.isArray(r.dist)||r.dist.length!==6) r.dist=[0,0,0,0,0,0];
+    return Object.assign(d,r);
+  }catch(e){return {played:0,wins:0,streak:0,best:0,lastDay:null,dist:[0,0,0,0,0,0]};}
+}
+function saveStats(st){try{localStorage.setItem(STATKEY,JSON.stringify(st));}catch(e){}}
+function recordResult(won){
+  const st=loadStats();
+  if(st.lastDay===dayNum) return st;              // already counted today
+  st.played++;
+  if(won){ st.wins++; st.streak = (st.lastDay===dayNum-1) ? (st.streak||0)+1 : 1;
+           const gi=Math.min(guesses.length,6)-1; if(gi>=0) st.dist[gi]=(st.dist[gi]||0)+1; }
+  else   { st.streak = 0; }
+  st.best=Math.max(st.best||0, st.streak);
+  st.lastDay=dayNum;
+  saveStats(st); return st;
+}
+function currentStats(){
+  const st=loadStats();
+  /* a streak older than yesterday has lapsed */
+  if(st.lastDay!==null && st.lastDay<dayNum-1) st.streak=0;
+  return st;
+}
 function persist(){
   if(!isDaily) return;
   try{ localStorage.setItem(SKEY, JSON.stringify({d:dayNum,w:ANSWER,g:guesses,done:over})); }catch(e){}
@@ -365,13 +519,19 @@ function restore(){
 function flash(m){msgEl.classList.remove('win');msgEl.textContent=m;setTimeout(()=>{if(!over)msgEl.textContent='';},1200);}
 function shake(){const r=boardEl.children[row];r.classList.add('shake');setTimeout(()=>r.classList.remove('shake'),400);}
 function showShare(){shareBtn.style.display='block';
-  shareBtn.onclick=()=>{const emo={correct:'🟩',present:'🟧',absent:'⬛'};
+  const doShare=()=>{
     const solved=results.some(r=>r.every(x=>x==='correct'));
-    const head=`Desi Wordle #${dayNum} ${solved?results.length:'X'}/6`;
-    const body=results.map(r=>r.map(x=>emo[x]).join('')).join('\n');
-    const text=head+'\n\n'+body+'\n\nplay the desi wordle';
+    const st=isDaily?currentStats():null;
+    const flame=(st&&st.streak>0)?`  \u{1F525}${st.streak}`:'';
+    const head=`Desi Wordle \u0936\u0930\u094D\u0921\u0932 #${dayNum}  ${solved?results.length:'X'}/6${flame}`;
+    const body=results.map(r=>r.map(x=>EMO[x]).join('')).join('\n');
+    const text=head+'\n\n'+body+'\n\n'+GAME_URL;
     navigator.clipboard?.writeText(text).then(()=>{const o=shareBtn.textContent;shareBtn.textContent='Copied!';
-      setTimeout(()=>shareBtn.textContent=o,1500);}).catch(()=>flash("Couldn't copy"));};}
+      setTimeout(()=>shareBtn.textContent=o,1500);}).catch(()=>flash("Couldn't copy"));};
+  shareBtn.onclick=doShare;
+  const ms=document.getElementById('mShare');
+  ms.onclick=()=>{doShare();const o=ms.textContent;ms.textContent='Copied!';
+    setTimeout(()=>ms.textContent=o,1500);};}
 document.addEventListener('keydown',e=>{const k=e.key.toUpperCase();
   if(k==='ENTER'||k==='BACKSPACE'||/^[A-Z]$/.test(k)){if(k.length===1||k==='ENTER'||k==='BACKSPACE'){handle(k==='BACKSPACE'?'DEL':k);}}});
 
@@ -380,6 +540,7 @@ document.getElementById('dayLabel').textContent=`No. ${dayNum} · ${istNow.toLoc
 function resetBoard(){
   over=false;row=0;col=0;results.length=0;guesses.length=0;
   document.getElementById('success').classList.remove('show');
+  document.getElementById('keyboard').classList.remove('hidden');
   for(let r=0;r<ROWS;r++)for(let c=0;c<LEN;c++){grid[r][c]='';
     const t=document.getElementById(`t${r}-${c}`);t.textContent='';t.className='tile';}
   Object.entries(keyEls).forEach(([label,k])=>{k.classList.remove('correct','present','absent');k.textContent=label;});
