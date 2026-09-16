@@ -179,18 +179,12 @@
   .drow.on .bar{background:var(--grn);}
   .dnote{font-family:"Khand",sans-serif;font-weight:600;font-size:10.5px;color:var(--fade-txt);
      letter-spacing:.5px;margin-top:9px;}
-  .caldow-row{display:grid;grid-template-columns:repeat(7,1fr);margin-top:8px;}
-  .caldow-row span{font-family:"Khand",sans-serif;font-weight:700;font-size:9px;
-     letter-spacing:.5px;color:var(--fade-txt);text-align:center;text-transform:uppercase;}
-  .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:4px;}
-  .calcell{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center;
-     border-radius:4px;background:rgba(233,168,60,.10);}
-  .calcell.empty{background:transparent;visibility:hidden;}
+  .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px;}
+  .calcell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+     border-radius:50%;background:rgba(233,168,60,.10);}
   .calcell.played{background:rgba(62,122,70,.14);}
-  .calcell .cnum{position:absolute;top:2px;left:3px;font-family:"Khand",sans-serif;font-weight:600;
-     font-size:7px;color:var(--fade-txt);}
-  .calcell .cemo{font-size:15px;line-height:1;}
-  .calcell .cdot{width:8px;height:8px;border-radius:50%;background:var(--fade-txt);opacity:.32;}
+  .calcell .cemo{font-size:16px;line-height:1;}
+  .calcell .cdot{width:9px;height:9px;border-radius:50%;background:var(--fade-txt);opacity:.30;}
   .mshare{margin-top:12px;background:var(--red);color:var(--cream);border:2px solid var(--brown);
      font-family:"Alfa Slab One",serif;font-size:12px;letter-spacing:1.5px;padding:9px 18px;
      border-radius:4px;cursor:pointer;text-transform:uppercase;}
@@ -292,8 +286,7 @@
       <div class="dhead">Guess distribution</div>
       <div id="mDist"></div>
       <div class="dnote" id="mNote"></div>
-      <div class="dhead" id="mCalHead">This month</div>
-      <div class="caldow-row" id="mCalDow"></div>
+      <div class="dhead">This month</div>
       <div class="calgrid" id="mCal"></div>
       <button class="mshare" id="mShare">Share result</button>
     </div>
@@ -463,20 +456,13 @@ function renderStats(){
 const CAL_EMOJI='\u{1FA94}'; /* diya — matches the "correct" tile emoji */
 function renderCalendar(st){
   const year=istNow.getUTCFullYear(), month=istNow.getUTCMonth();
-  const head=document.getElementById('mCalHead');
-  head.textContent=new Date(Date.UTC(year,month,1))
-    .toLocaleDateString('en-IN',{month:'long',year:'numeric',timeZone:'UTC'});
-  const dowRow=document.getElementById('mCalDow');
-  if(!dowRow.childElementCount) dowRow.innerHTML=['S','M','T','W','T','F','S'].map(d=>`<span>${d}</span>`).join('');
   const days=st.days||{};
-  const firstWeekday=new Date(Date.UTC(year,month,1)).getUTCDay();
   const daysInMonth=new Date(Date.UTC(year,month+1,0)).getUTCDate();
   let html='';
-  for(let i=0;i<firstWeekday;i++) html+='<div class="calcell empty"></div>';
   for(let d=1;d<=daysInMonth;d++){
     const dn=Math.floor((Date.UTC(year,month,d)-Date.UTC(2024,0,1))/86400000);
     const played=!!days[dn];
-    html+=`<div class="calcell${played?' played':''}"><span class="cnum">${d}</span>`
+    html+=`<div class="calcell${played?' played':''}">`
         + (played?`<span class="cemo">${CAL_EMOJI}</span>`:'<span class="cdot"></span>')
         + `</div>`;
   }
