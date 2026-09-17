@@ -102,6 +102,7 @@
      font-weight:400;font-size:16px;letter-spacing:.5px;color:var(--red);
      text-transform:uppercase;padding-top:2px;}
   #message.win{color:var(--grn);}
+  #message.done{min-height:0;padding-top:0;}
   .share-btn{display:none;margin:6px auto 0;background:var(--red);color:var(--cream);
      border:2px solid var(--brown);font-family:"Alfa Slab One",serif;font-weight:400;
      font-size:13px;letter-spacing:1.5px;padding:9px 20px;border-radius:4px;cursor:pointer;
@@ -362,7 +363,7 @@ function submit(){
 function meaningOf(w){const e=BANK.find(x=>x[0]===w);return e&&e[1]?e[1]:'';}
 function endGame(won,fresh){
   over=true;
-  msgEl.textContent=''; msgEl.classList.remove('win');
+  msgEl.textContent=''; msgEl.classList.remove('win'); msgEl.classList.add('done');
   if(isDaily && fresh) recordResult(won);
   showSuccess(won);
   document.getElementById('keyboard').classList.add('hidden');   // redundant once solved
@@ -570,7 +571,7 @@ function resetBoard(){
   for(let r=0;r<ROWS;r++)for(let c=0;c<LEN;c++){grid[r][c]='';
     const t=document.getElementById(`t${r}-${c}`);t.textContent='';t.className='tile';}
   Object.entries(keyEls).forEach(([label,k])=>{k.classList.remove('correct','present','absent');k.textContent=label;});
-  msgEl.textContent='';msgEl.classList.remove('win');shareBtn.style.display='none';
+  msgEl.textContent='';msgEl.classList.remove('win');msgEl.classList.remove('done');shareBtn.style.display='none';
 }
 function newWord(){
   if(!WORDS.length) return;
