@@ -12,7 +12,7 @@
     --page:#E4D3AC; --cream:#F4E7C6; --red:#C7402E; --red-lt:#D8543F;
     --must:#E9A83C; --teal:#1F6E63; --brown:#6B4A2E; --grn:#3E7A46;
     --fade:#C3AE8A; --fade-txt:#8F7B58; --sage:#8CA47F;
-    --tile:58px; --gap:8px; --perf:9px;
+    --tile:clamp(42px,calc((100vh - 500px) / 6.6),58px); --gap:clamp(5px,1vh,8px); --perf:9px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;background:var(--page);color:var(--brown);
@@ -29,7 +29,7 @@
      background-repeat:repeat-y;background-size:56px 148px;}
   .vine.left{left:0;} .vine.right{right:0;transform:scaleX(-1);}
 
-  .wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:64px 60px 64px;}
+  .wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:40px 60px 32px;}
 
   /* ---------- stamp ---------- */
   .stampwrap{filter:drop-shadow(0 7px 16px rgba(107,74,46,.26));}
@@ -52,7 +52,7 @@
      mask-repeat: round no-repeat, round no-repeat, no-repeat round, no-repeat round;
      mask-composite: intersect;}
   .inner{position:relative;background:var(--cream);border:3px solid var(--red);
-     border-radius:4px;padding:16px 14px 20px;overflow:hidden;}
+     border-radius:4px;padding:14px 14px 14px;overflow:hidden;}
   .inner::after{content:"";position:absolute;inset:0;pointer-events:none;
      background-image:radial-gradient(circle 1px at 2px 2px, rgba(107,74,46,.07) 1px, transparent 1px);
      background-size:9px 9px;}
@@ -67,18 +67,18 @@
      -webkit-text-stroke:2px var(--brown); paint-order:stroke fill;}
   h1 .en{font-family:"Khand",sans-serif;font-weight:700;
      font-size:var(--wm);letter-spacing:1px;}
-  /* Devanagari sits ~21% taller at equal size, so scale it down to match */
+  /* Devanagari sits ~21% taller at equal size; scaled down slightly, but kept a touch larger for visual weight */
   h1 .dv{font-family:"Khand",sans-serif;font-weight:700;
-     font-size:calc(var(--wm) * 0.826);letter-spacing:.5px;}
-  .est{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;}
+     font-size:calc(var(--wm) * 0.9);letter-spacing:.5px;}
+  .est{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:3px;}
   .est span{font-family:"Khand",sans-serif;font-weight:600;font-size:12.5px;
      letter-spacing:3px;color:#F5E3C0;white-space:nowrap;}
-  .est i{display:block;height:2px;flex:0 1 74px;min-width:26px;
+  .est i{display:block;height:1px;flex:0 1 74px;min-width:26px;
      background:#EFD3A6;opacity:.9;border-radius:2px;}
 
   /* ---------- board ---------- */
   #board{display:grid;grid-template-rows:repeat(6,var(--tile));gap:var(--gap);
-     justify-content:center;margin:18px 0 10px;}
+     justify-content:center;margin:12px 0 4px;}
   .brow{display:grid;grid-template-columns:repeat(5,var(--tile));gap:var(--gap);}
   .tile{width:var(--tile);height:var(--tile);border-radius:5px;position:relative;
      display:flex;align-items:center;justify-content:center;
@@ -98,7 +98,7 @@
   @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}
      40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 
-  #message{min-height:24px;text-align:center;font-family:"Alfa Slab One",serif;
+  #message{min-height:20px;text-align:center;font-family:"Alfa Slab One",serif;
      font-weight:400;font-size:16px;letter-spacing:.5px;color:var(--red);
      text-transform:uppercase;padding-top:2px;}
   #message.win{color:var(--grn);}
@@ -110,10 +110,10 @@
   .share-btn:active{transform:translateY(2px);}
 
   /* ---------- keyboard ---------- */
-  #keyboard{display:flex;flex-direction:column;gap:6px;margin-top:14px;}
+  #keyboard{display:flex;flex-direction:column;gap:5px;margin-top:4px;}
   .krow{display:flex;justify-content:center;gap:5px;}
   .key{font-family:"Bebas Neue",sans-serif;font-weight:400;font-size:22px;letter-spacing:.5px;
-     min-width:26px;height:44px;padding:0 3px;border-radius:4px;cursor:pointer;
+     min-width:26px;height:42px;padding:0 3px;border-radius:4px;cursor:pointer;
      background:var(--cream);border:1.6px solid var(--brown);color:var(--red);
      display:flex;align-items:center;justify-content:center;flex:1;user-select:none;
      transition:background .2s;}
@@ -163,10 +163,11 @@
   .mmean{font-family:"Khand",sans-serif;font-weight:600;font-size:12.5px;
      color:var(--fade-txt);letter-spacing:1px;}
   .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0 6px;}
-  .mgrid div{background:rgba(233,168,60,.16);border-radius:4px;padding:7px 2px;}
+  .mgrid>div{display:flex;flex-direction:column;gap:4px;}
+  .mgrid .n,.mgrid .l{background:rgba(233,168,60,.16);border-radius:4px;padding:6px 2px;}
   .mgrid .n{font-family:"Bebas Neue",sans-serif;font-size:23px;color:var(--red);line-height:1;}
   .mgrid .l{font-family:"Khand",sans-serif;font-weight:600;font-size:9.5px;
-     letter-spacing:1px;color:var(--brown);text-transform:uppercase;margin-top:2px;}
+     letter-spacing:1px;color:var(--brown);text-transform:uppercase;}
   .dhead{font-family:"Khand",sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;
      color:var(--brown);text-transform:uppercase;margin:12px 0 7px;
      display:flex;align-items:center;gap:8px;}
@@ -178,8 +179,6 @@
      font-family:"Bebas Neue",sans-serif;font-size:13px;color:var(--cream);
      transition:width .5s ease;}
   .drow.on .bar{background:var(--grn);}
-  .dnote{font-family:"Khand",sans-serif;font-weight:600;font-size:10.5px;color:var(--fade-txt);
-     letter-spacing:.5px;margin-top:9px;}
   .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px;}
   .calcell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
      border-radius:50%;background:rgba(233,168,60,.10);}
@@ -202,27 +201,30 @@
      color:var(--fade-txt);letter-spacing:1px;margin-top:2px;}
   .success .smeta{font-family:"Khand",sans-serif;font-weight:700;font-size:12px;
      letter-spacing:2px;color:var(--grn);margin-top:5px;text-transform:uppercase;}
-  .footer{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
-     margin-top:14px;font-size:11.5px;letter-spacing:2px;color:var(--brown);
+  .footer{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;
+     margin-top:10px;font-size:10px;letter-spacing:1.5px;color:var(--brown);
      text-transform:uppercase;font-weight:600;opacity:.75;}
+  .footer .refresh{justify-self:start;} #dayLabel{text-align:center;} .footer .statsbtn{justify-self:end;}
   .refresh{font-family:"Khand",sans-serif;font-weight:700;text-transform:uppercase;
      letter-spacing:2px;font-size:11.5px;color:var(--teal);background:var(--cream);
      border:1.5px solid var(--teal);padding:5px 12px;border-radius:4px;cursor:pointer;}
   .refresh:active{transform:translateY(1px);}
   @media (max-width:520px){
-    :root{--tile:48px;--gap:5px;}
-    .wrap{padding:44px 30px;}
+    :root{--tile:clamp(30px,calc((100vh - 460px) / 6),48px);--gap:5px;}
+    @supports (height:100svh){:root{--tile:clamp(30px,calc((100svh - 460px) / 6),48px);}}
+    .wrap{padding:28px 30px 22px;}
     .inner{padding:12px 8px 16px;}
     .krow{gap:3px;}
     .key{height:40px;font-size:16px;min-width:0;padding:0;border-width:1.4px;}
     .key.wide{flex:1.4;font-size:9.5px;letter-spacing:0;}
     .est span{font-size:10.5px;letter-spacing:2px;}
     .est i{flex-basis:36px;min-width:16px;}
-    .footer{gap:8px;font-size:10.5px;letter-spacing:1px;}
+    .footer{gap:6px;font-size:9.5px;letter-spacing:.5px;}
   }
   @media (max-width:380px){
-    :root{--tile:44px;--gap:4px;}
-    .wrap{padding:40px 22px;}
+    :root{--tile:clamp(30px,calc((100vh - 450px) / 6),44px);--gap:4px;}
+    @supports (height:100svh){:root{--tile:clamp(30px,calc((100svh - 450px) / 6),44px);}}
+    .wrap{padding:24px 22px 20px;}
     .key{height:36px;font-size:14px;}
   }
   @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important;} }
@@ -260,8 +262,8 @@
       <div id="keyboard"></div>
 
       <div class="footer">
-        <span id="dayLabel"></span>
         <button class="refresh" id="refreshBtn" type="button">New word</button>
+        <span id="dayLabel"></span>
         <button class="statsbtn" id="statsBtn" type="button" aria-label="Statistics">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <rect x="2" y="13" width="5" height="9" rx="1"/><rect x="9.5" y="7" width="5" height="15" rx="1"/>
@@ -284,10 +286,9 @@
         <div><div class="n" id="stStreak">0</div><div class="l">Streak</div></div>
         <div><div class="n" id="stBest">0</div><div class="l">Best</div></div>
       </div>
-      <div class="dhead">Guess distribution</div>
+      <div class="dhead">Solved in</div>
       <div id="mDist"></div>
-      <div class="dnote" id="mNote"></div>
-      <div class="dhead">This month</div>
+      <div class="dhead" id="calHead">This month</div>
       <div class="calgrid" id="mCal"></div>
       <button class="mshare" id="mShare">Share result</button>
     </div>
@@ -301,8 +302,10 @@
 const IST_OFFSET=5.5*3600000;
 const istNow=new Date(Date.now()+IST_OFFSET);
 const today=istNow;
+/* Puzzle No. 1 is 1 Oct 2026. */
+const EPOCH=Date.UTC(2026,9,1);
 const dayNum=Math.floor((Date.UTC(istNow.getUTCFullYear(),istNow.getUTCMonth(),istNow.getUTCDate())
-                         - Date.UTC(2024,0,1))/86400000);
+                         - EPOCH)/86400000)+1;
 const ROWS=6, LEN=5;
 
 const boardEl=document.getElementById('board');
@@ -449,19 +452,18 @@ function renderStats(){
     return `<div class="drow${mine===i+1?' on':''}"><span class="k">${i+1}</span>`
          + `<span class="bar" style="width:${w}%">${n}</span></div>`;
   }).join('');
-  document.getElementById('mNote').textContent =
-    dist.some(n=>n>0) ? 'Counts daily words only.' : 'Play a few days to fill this in.';
   document.getElementById('mShare').style.display = (isDaily && over) ? 'inline-block' : 'none';
   renderCalendar(st);
 }
-const CAL_EMOJI='\u{1FA94}'; /* diya — matches the "correct" tile emoji */
+const CAL_EMOJI='\u{1FA94}'; /* diya marks a played day */
 function renderCalendar(st){
   const year=istNow.getUTCFullYear(), month=istNow.getUTCMonth();
   const days=st.days||{};
   const daysInMonth=new Date(Date.UTC(year,month+1,0)).getUTCDate();
+  document.getElementById('calHead').textContent=istNow.toLocaleDateString('en-IN',{month:'long',timeZone:'UTC'})+' streak';
   let html='';
   for(let d=1;d<=daysInMonth;d++){
-    const dn=Math.floor((Date.UTC(year,month,d)-Date.UTC(2024,0,1))/86400000);
+    const dn=Math.floor((Date.UTC(year,month,d)-EPOCH)/86400000)+1;
     const played=!!days[dn];
     html+=`<div class="calcell${played?' played':''}">`
         + (played?`<span class="cemo">${CAL_EMOJI}</span>`:'<span class="cdot"></span>')
@@ -477,13 +479,13 @@ document.getElementById('overlay').onclick=e=>{ if(e.target.id==='overlay') clos
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeStats(); });
 
 /* ---------- progress saving (daily game only) ---------- */
-const SKEY='desiwordle:v1';
-const STATKEY='desiwordle:stats:v1';
+const SKEY='desiwordle:v2';
+const STATKEY='desiwordle:stats:v2';
 /* Auto-detects the live URL once hosted; edit the fallback if you want a fixed link. */
 const GAME_URL = location.protocol.indexOf('http')===0
   ? location.origin+location.pathname
   : 'https://your-username.github.io/desiwordle/';
-const EMO={correct:'\u{1FA94}',present:'\u{1F33C}',absent:'\u{1F965}'};
+const EMO={correct:'\u{1FA94}',present:'\u{1FAB7}',absent:'\u{1F965}'};
 const WIN_PHRASES=["Kya baat!","Shabaash!","Wah wah!","Ekdum sahi!","Zabardast!",
   "Kamaal kar diya!","Ekdum jhakaas!","Sahi pakde hain!","Balle balle!","Mast!","Bilkul theek!"];
 function loadStats(){
@@ -548,13 +550,14 @@ function shake(){const r=boardEl.children[row];r.classList.add('shake');setTimeo
 function showShare(){shareBtn.style.display='block';
   const doShare=()=>{
     const solved=results.some(r=>r.every(x=>x==='correct'));
-    const st=isDaily?currentStats():null;
-    const flame=(st&&st.streak>0)?`  \u{1F525}${st.streak}`:'';
-    const head=`Desi Wordle \u0936\u0930\u094D\u0921\u0932 #${dayNum}  ${solved?results.length:'X'}/6${flame}`;
+    const head=`Desi Wordle #${dayNum} · ${solved?results.length:'X'}/6`;
     const body=results.map(r=>r.map(x=>EMO[x]).join('')).join('\n');
     const text=head+'\n\n'+body+'\n\n'+GAME_URL;
     navigator.clipboard?.writeText(text).then(()=>{const o=shareBtn.textContent;shareBtn.textContent='Copied!';
-      setTimeout(()=>shareBtn.textContent=o,1500);}).catch(()=>flash("Couldn't copy"));};
+      setTimeout(()=>shareBtn.textContent=o,1500);}).catch(()=>flash("Couldn't copy"));
+    /* On phones also open the native share sheet; must run inside the tap. */
+    if(navigator.share && matchMedia('(pointer:coarse)').matches)
+      navigator.share({text}).catch(()=>{});};
   shareBtn.onclick=doShare;
   const ms=document.getElementById('mShare');
   ms.onclick=()=>{doShare();const o=ms.textContent;ms.textContent='Copied!';
