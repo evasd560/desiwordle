@@ -344,7 +344,7 @@ let row=0,col=0,over=false,ready=false,isDaily=true;
 let roundStart=Date.now();
 function track(ev,props){try{ if(window.posthog&&posthog.capture) posthog.capture(ev,props); }catch(e){}}
 function roundInfo(){const e=BANK.find(x=>x[0]===ANSWER)||[];
-  return {mode:isDaily?'daily':'new_word', puzzle_no:dayNum, answer:ANSWER, category:e[2]||''};}
+  return {mode:isDaily?'daily':'new_word', puzzle_no:dayNum, answer:ANSWER, category:e[2]||'', language:e[3]||''};}
 function startRound(){roundStart=Date.now(); track('game_start',roundInfo());}
 const guesses=[];
 let BANK=[],WORDS=[],ANSWER='',todayIndex=0;
@@ -631,7 +631,7 @@ function parseWords(text){
     const p=ln.split('|').map(s=>s.trim());
     const w=(p[0]||'').toUpperCase();
     if(!/^[A-Z]{5}$/.test(w)||seen.has(w)) continue;
-    seen.add(w); out.push([w, p[1]||'', p[2]||'Words']);
+    seen.add(w); out.push([w, p[1]||'', p[2]||'Words', (p[3]||'').toLowerCase()]);
   }
   return out;
 }
