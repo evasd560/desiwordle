@@ -8,6 +8,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Desi Wordle">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#E4D3AC">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://desi-wordle.vercel.app/">
@@ -666,6 +671,10 @@ function showPicker(){
     startGame(parseWords(await r.text()));
   }catch(err){ showPicker(); }
 })();
+</script>
+<script>
+if('serviceWorker' in navigator && location.protocol==='https:')
+  addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
 </script>
 </body>
 </html>
